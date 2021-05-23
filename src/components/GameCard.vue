@@ -41,12 +41,26 @@ export default {
     }, this.counter * 100)
   },
   computed: {
+    openedCards() {
+      return this.$store.getters.openedCards
+    },
     image() {
       return require(`../assets/icons/icon-${this.counter}.svg`)
     },
     hide() {
       const arr = this.$store.getters.hiddenCards.filter((el) => el === this.counter)
       return !!arr.length
+    },
+  },
+  watch: {
+    openedCards() {
+      if (this.open && this.openedCards === 2) {
+        setTimeout(() => {
+          if (this.open) {
+            this.closeCard()
+          }
+        }, 1000)
+      }
     },
   },
   methods: {
@@ -72,9 +86,11 @@ export default {
       }, 5000)
     },
     closeCard() {
-      this.clicked = false
       this.open = false
       this.$store.dispatch(CLOSE_CARD, this.counter)
+      setTimeout(() => {
+        this.clicked = false
+      }, 500)
     },
   },
 }

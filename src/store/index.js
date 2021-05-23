@@ -27,9 +27,7 @@ export default new Vuex.Store({
         const minutes = Math.floor(timer / 60)
         const seconds = timer - minutes * 60
         return `
-          ${minutes < 10 ? `0${minutes}` : minutes}
-          :
-          ${seconds < 10 ? `0${seconds}` : seconds}
+          ${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}
         `
       }
       return `00:${timer < 10 ? `0${timer}` : timer}`
