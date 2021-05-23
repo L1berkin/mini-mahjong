@@ -92,12 +92,6 @@ export default {
   }
 }
 
-@media screen and (max-width: 650px) {
-  .card-table {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
 @media screen and (max-width: 450px) {
   .card-table {
     width: 96%;

@@ -155,9 +155,9 @@ export default {
   opacity: 0;
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 650px) {
   .game-card {
-    height: 200px;
+    height: 150px;
   }
 }
 </style>
