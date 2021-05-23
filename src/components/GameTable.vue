@@ -1,8 +1,9 @@
 <template>
   <section class="card-table">
     <game-card
-      v-for="el in cards"
+      v-for="(el, index) in cards"
       :key="'' + el + Math.random()"
+      :index="index + 1"
       :counter="Math.round(el / 2)"
     />
   </section>

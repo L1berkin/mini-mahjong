@@ -27,18 +27,23 @@ export default {
       type: Number,
       default: 0,
     },
+    index: {
+      type: Number,
+      default: 0,
+    },
   },
   data() {
     return {
       clicked: false,
       open: false,
       beforeStart: true,
+      timeout: null,
     }
   },
   mounted() {
     setTimeout(() => {
       this.beforeStart = false
-    }, this.counter * 100)
+    }, this.index * 100)
   },
   computed: {
     openedCards() {
@@ -70,6 +75,10 @@ export default {
         return
       }
 
+      if (this.timeout) {
+        clearTimeout(this.timeout)
+      }
+
       this.$store.dispatch(OPEN_CARD, this.counter)
       this.clicked = true
       this.open = true
@@ -79,7 +88,7 @@ export default {
         }, 100)
       }
 
-      setTimeout(() => {
+      this.timeout = setTimeout(() => {
         if (this.open) {
           this.closeCard()
         }
