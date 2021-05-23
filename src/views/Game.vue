@@ -33,7 +33,7 @@ export default {
   name: 'Game',
   data() {
     return {
-      numberOfCards: 12,
+      numberOfCards: 36,
       showModal: true,
     }
   },
