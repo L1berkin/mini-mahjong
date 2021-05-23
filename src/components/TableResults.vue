@@ -77,6 +77,7 @@ export default {
   height: 400px;
   margin-top: 50px;
   background: #ffdeb1;
+  overflow: hidden;
   border-radius: 10px;
   box-shadow: 0 0 15px 0 #000, inset 0 0 20px 0 #fff2e0;
   transform: translateY(-150%);
@@ -97,6 +98,21 @@ export default {
   text-align: center;
   color: #5e5e5e;
   font-size: 1.1rem;
+}
+
+.results-list {
+  overflow: auto;
+  height: 330px;
+}
+
+.results-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.results-list::-webkit-scrollbar-thumb {
+  width: 5px;
+  background: #037050;
+  border-radius: 2.5px;
 }
 
 .results-list__item {
