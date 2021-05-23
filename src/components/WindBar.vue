@@ -11,13 +11,21 @@
     >
       Таблица результатов
     </router-link>
+    <base-button
+      @click="startGameAgain"
+      class="win-bar__btn"
+    >
+      Играть снова
+    </base-button>
   </section>
 </template>
 
 <script>
 import { CLEAR_STATE } from '../store/actions'
+import BaseButton from './BaseButton.vue'
 
 export default {
+  components: { BaseButton },
   name: 'WinBar',
   beforeDestroy() {
     this.$store.dispatch(CLEAR_STATE)
@@ -25,6 +33,11 @@ export default {
   computed: {
     time() {
       return this.$store.getters.normalTime
+    },
+  },
+  methods: {
+    startGameAgain() {
+      this.$store.dispatch(CLEAR_STATE)
     },
   },
 }
@@ -67,5 +80,9 @@ export default {
 .win-bar__link:active {
   transform: translateY(5px);
   box-shadow: 0 0 10px 0 #000, inset 0 0 40px -5px #037050;
+}
+
+.win-bar__btn {
+  margin-top: 20px;
 }
 </style>

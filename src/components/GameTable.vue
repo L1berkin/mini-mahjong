@@ -29,6 +29,7 @@ export default {
     for (let i = 1; i <= this.numberOfCards; i += 1) {
       this.cards.push(i)
     }
+    this.sortCards()
   },
   beforeDestroy() {
     const { hiddenCards } = this.$store.getters
@@ -50,6 +51,18 @@ export default {
         }))
       }
     }
+  },
+  methods: {
+    sortCards() {
+      let j;
+      let temp;
+      for (let i = this.cards.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        temp = this.cards[j];
+        this.cards[j] = this.cards[i];
+        this.cards[i] = temp;
+      }
+    },
   },
 }
 </script>

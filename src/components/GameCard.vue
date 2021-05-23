@@ -62,7 +62,7 @@ export default {
       if (numbersOpenedCards[0] === numbersOpenedCards[1]) {
         setTimeout(() => {
           this.$store.dispatch(HIDE_CARDS)
-        }, 500)
+        }, 100)
       }
 
       setTimeout(() => {

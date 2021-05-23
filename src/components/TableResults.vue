@@ -9,7 +9,10 @@
     >
       Вы не сыграли еще ни одной игры
     </p>
-    <ul class="results-list">
+    <ul
+      v-else
+      class="results-list"
+    >
       <li class="results-list__item">
         <p class="results-list__title">
           Номер
