@@ -16,6 +16,9 @@ module.exports = {
     'linebreak-style': 'off',
     'semi': 'off',
     'global-require': 'off',
-    'import/no-dynamic-require': 'off'
+    'import/no-dynamic-require': 'off',
+    'no-plusplus': 'off',
+    'no-param-reassign': 'off',
+    'no-restricted-globals': 'off',
   },
 };

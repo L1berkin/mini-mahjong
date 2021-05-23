@@ -3,7 +3,8 @@
     class="game-card"
     :class="{
       open: open && !beforeStart,
-      'before-start': beforeStart
+      'before-start': beforeStart,
+      hide
     }"
     @click="openCard"
   >
@@ -17,6 +18,8 @@
 </template>
 
 <script>
+import { OPEN_CARD, CLOSE_CARD, HIDE_CARDS } from '../store/actions'
+
 export default {
   name: 'GameCard',
   props: {
@@ -41,21 +44,37 @@ export default {
     image() {
       return require(`../assets/icons/icon-${this.counter}.svg`)
     },
+    hide() {
+      const arr = this.$store.getters.hiddenCards.filter((el) => el === this.counter)
+      return !!arr.length
+    },
   },
   methods: {
     openCard() {
-      if (this.clicked) {
+      const { numbersOpenedCards } = this.$store.getters
+      if (this.clicked || this.$store.getters.openedCards >= 2) {
         return
       }
+
+      this.$store.dispatch(OPEN_CARD, this.counter)
       this.clicked = true
       this.open = true
+      if (numbersOpenedCards[0] === numbersOpenedCards[1]) {
+        setTimeout(() => {
+          this.$store.dispatch(HIDE_CARDS)
+        }, 500)
+      }
+
       setTimeout(() => {
-        this.closeCard()
+        if (this.open) {
+          this.closeCard()
+        }
       }, 5000)
     },
     closeCard() {
       this.clicked = false
       this.open = false
+      this.$store.dispatch(CLOSE_CARD, this.counter)
     },
   },
 }
@@ -86,6 +105,8 @@ export default {
 .game-card__icon {
   width: 80px;
   opacity: 0;
+  user-select: none;
+  pointer-events: none;
   transform: rotate(180deg);
   transition: 0s .1s;
 }
@@ -103,6 +124,10 @@ export default {
 
 .before-start {
   transform: translateX(-3500px);
+}
+
+.hide {
+  opacity: 0;
 }
 
 @media screen and (max-width: 450px) {

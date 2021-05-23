@@ -8,26 +8,18 @@
 </template>
 
 <script>
+import { ADD_SECOND } from '../store/actions'
+
 export default {
   name: 'GameTimer',
   data() {
     return {
-      counterSeconds: 0,
       timer: null,
     }
   },
   computed: {
     time() {
-      if (this.counterSeconds > 60) {
-        const minutes = Math.floor(this.counterSeconds / 60)
-        const seconds = this.counterSeconds - minutes * 60
-        return `
-          ${minutes < 10 ? `0${minutes}` : minutes}
-          :
-          ${seconds < 10 ? `0${seconds}` : seconds}
-        `
-      }
-      return `00:${this.counterSeconds < 10 ? `0${this.counterSeconds}` : this.counterSeconds}`
+      return this.$store.getters.normalTime
     },
   },
   mounted() {
@@ -39,7 +31,7 @@ export default {
   methods: {
     startTimer() {
       this.timer = setInterval(() => {
-        this.counterSeconds += 1
+        this.$store.dispatch(ADD_SECOND)
       }, 1000)
     },
   },

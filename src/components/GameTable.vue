@@ -1,9 +1,9 @@
 <template>
   <section class="card-table">
     <game-card
-      v-for="el in 12"
-      :key="el"
-      :counter="el"
+      v-for="el in cards"
+      :key="'' + el + Math.random()"
+      :counter="Math.round(el / 2)"
     />
   </section>
 </template>
@@ -14,6 +14,43 @@ import GameCard from './GameCard.vue'
 export default {
   components: { GameCard },
   name: 'GameTable',
+  props: {
+    numberOfCards: {
+      type: Number,
+      defaultStatus: 36,
+    },
+  },
+  data() {
+    return {
+      cards: [],
+    }
+  },
+  mounted() {
+    for (let i = 1; i <= this.numberOfCards; i += 1) {
+      this.cards.push(i)
+    }
+  },
+  beforeDestroy() {
+    const { hiddenCards } = this.$store.getters
+    if (hiddenCards.length === this.numberOfCards / 2) {
+      const results = JSON.parse(localStorage.getItem('results'))
+      if (results) {
+        const newResults = {
+          data: [
+            ...results.data,
+            { date: new Date(), time: this.$store.getters.normalTime },
+          ],
+        }
+        localStorage.setItem('results', JSON.stringify(newResults))
+      } else {
+        localStorage.setItem('results', JSON.stringify({
+          data: [
+            { date: new Date(), time: this.$store.getters.normalTime },
+          ],
+        }))
+      }
+    }
+  },
 }
 </script>
 
@@ -27,7 +64,6 @@ export default {
   max-width: 1300px;
   margin: 50px auto 0;
   padding-bottom: 60px;
-  border: 1px solid #000;
 }
 
 @media screen and (max-width: 1430px) {

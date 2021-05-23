@@ -1,0 +1,5 @@
+export const ADD_SECOND = 'ADD_SECOND'
+export const OPEN_CARD = 'OPEN_CARD'
+export const CLOSE_CARD = 'CLOSE_CARD'
+export const HIDE_CARDS = 'HIDE_CARDS'
+export const CLEAR_STATE = 'CLEAR_STATE'
